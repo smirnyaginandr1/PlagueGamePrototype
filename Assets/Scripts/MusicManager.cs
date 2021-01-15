@@ -24,19 +24,21 @@ public class MusicManager : MonoBehaviour
         _mainMusic.volume = _volume.value;
         _onClickMusic.volume = _soundEffect.value;
     }
-    void YouWinMusic()
+    public void YouWinMusic()
     {
-        if (_mainMusic.loop = true)
+        if(_mainMusic.isPlaying)
         {
             _mainMusic.Stop();
+            _onWinMusic.playOnAwake = true;
             _onWinMusic.Play();
         }
     }
-    void YouLoseMusic()
+    public void YouLoseMusic()
     {
-        if (_mainMusic.loop = true)
+        if (_mainMusic.isPlaying)
         {
             _mainMusic.Stop();
+            _onLoseMusic.playOnAwake = true;
             _onLoseMusic.Play();
         }
     }

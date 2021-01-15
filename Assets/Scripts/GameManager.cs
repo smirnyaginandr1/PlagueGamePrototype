@@ -23,15 +23,7 @@ public class GameManager : MonoBehaviour
     public static int _playerStartWaypoint;
     public static bool _gameOver;
     private static bool firstDice;
-    public GameObject 
-        _playerTurn,
-        _plagueTurn,
-        _playerTurnOn,
-        _playerTurnOff,
-        _plagueTurnOn,
-        _plagueTurnOff,
-        _plagueWin,
-        _playerWin;
+    public GameObject _plagueWin, _playerWin;
     // Start is called before the first frame update
     void Start()
     {
@@ -76,6 +68,7 @@ public class GameManager : MonoBehaviour
         {
             //TODO: добавить конец игры при поражении
             _plagueWin.gameObject.SetActive(true);
+            GameObject.Find("AudioManager").GetComponent<MusicManager>().YouLoseMusic();
             _gameOver = true;
         }
 
@@ -105,9 +98,6 @@ public class GameManager : MonoBehaviour
                     case 'C':
                         GameObject.Find("SpawnManager").GetComponent<PlagueSpawner>().checkCount = (int)Char.GetNumericValue(s[4]);
                         GameObject.Find("SpawnManager").GetComponent<CheckpointSpawner>().checkSize = (int)Char.GetNumericValue(s[4]);
-                        break;
-
-                    default:
                         break;
                 }
             }
@@ -226,6 +216,7 @@ public class GameManager : MonoBehaviour
     public void PlayerWin()
     {
         _playerWin.gameObject.SetActive(true);
+        GameObject.Find("AudioManager").GetComponent<MusicManager>().YouLoseMusic();
         _gameOver = true;
     }
     public static void SetPlayerActive(bool active)

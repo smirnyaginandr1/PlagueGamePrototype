@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        StartCoroutine("PlayerChangePose");
+        
     }
     public void Damage()
     {
@@ -36,15 +36,9 @@ public class Player : MonoBehaviour
        // GameObject.Find("Canvas").GetComponent<UIManager>().UpdateLives(_lives);
         if (_lives == 0)
         {
-            //Добавить кнопку рестарта _plagueSpawner.OnPlayerDeath();
-
-        }
-        else
-        {
             GetComponent<FollowThePath>().transform.position = Vector3.MoveTowards(GetComponent<FollowThePath>().transform.position,
-            respawnPoint, 10.0f);
+                respawnPoint, 10.0f);
         }
-        
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -59,7 +53,8 @@ public class Player : MonoBehaviour
                 transform.position = respawnPoint;
                 GameManager.SetPlayerActive(true);
                 Damage();
-//                GameObject.Find("AudioManager").GetComponent<MusicManager>()._onCollisionWithPlague.Play();
+                GameObject.Find("AudioManager").GetComponent<MusicManager>()._onCollisionWithPlague.playOnAwake=true;
+                GameObject.Find("AudioManager").GetComponent<MusicManager>()._onCollisionWithPlague.Play();
                 if (checkCount != 0)
                     triggerFixed = false;
                 break;
@@ -76,15 +71,8 @@ public class Player : MonoBehaviour
             case "FinalCell":
                 GameObject.Find("GameManager").GetComponent<GameManager>().PlayerWin();
                 break;
-            default:
-                break;
 
-        }
-    }
-    private IEnumerator PlayerChangePose()
-    {
-        yield return new WaitForSeconds(0.6f);
-   //     gameObject.GetComponent<SpriteRenderer>().sprite = _turnLeft;        
+        }      
     }
 
     static int[] AppendToStart()
