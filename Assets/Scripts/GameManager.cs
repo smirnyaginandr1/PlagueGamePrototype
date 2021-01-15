@@ -216,7 +216,7 @@ public class GameManager : MonoBehaviour
     public void PlayerWin()
     {
         _playerWin.gameObject.SetActive(true);
-        GameObject.Find("AudioManager").GetComponent<MusicManager>().YouLoseMusic();
+        GameObject.Find("AudioManager").GetComponent<MusicManager>().YouWinMusic();
         _gameOver = true;
     }
     public static void SetPlayerActive(bool active)
